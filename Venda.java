@@ -26,6 +26,10 @@ public class Venda {
 		return 0.25;
 	}
 
+	public double getImpostoValor(){
+		return this.getSubtotal()*this.getImposto();
+	}
+
 	public double getDesconto() {
 		if(itens.size()>=10){
 			return 0.1;
@@ -43,7 +47,7 @@ public class Venda {
 	}
 
 	public boolean insereItem(ItemDeVenda item) {
-		this.itens.add(this.getNumero(), item);
+		this.itens.add(item);
 		return true;
 	}
 
