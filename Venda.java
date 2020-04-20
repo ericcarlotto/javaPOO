@@ -17,22 +17,29 @@ public class Venda {
 	public double getSubtotal() {
 		double valorTotal=0;
 		for(ItemDeVenda it: itens){
-			valorTotal += it.getValorUnitarioVenda();
+			valorTotal += it.getValorUnitarioVenda()*it.getQuantidade();
 		}
 		return valorTotal;
 	}
 
 	public double getImposto() {
-		return 0.2;
+		return 0.25;
 	}
 
 	public double getDesconto() {
-		return 0.05;
+		if(itens.size()>=10){
+			return 0.1;
+		}else {
+			return 0;
+		}
 	}
 
 	public double getValorVenda() {
-		double vendaTot = (this.getSubtotal() + (this.getSubtotal()*this.getImposto())) - (this.getSubtotal()*this.getDesconto());
-		return vendaTot;
+		double subTot = this.getSubtotal();
+		double desc = subTot*this.getDesconto();
+		double impost = subTot*this.getImposto();
+		double valorTotal = subTot - desc + impost;
+		return valorTotal;
 	}
 
 	public boolean insereItem(ItemDeVenda item) {
